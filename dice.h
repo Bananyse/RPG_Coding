@@ -18,6 +18,7 @@ public:
 	const int getVal() { return this->dVal; }
 	enum rType {DEFAULT,TAKEMAX,TAKEMIN};
 	int roll(rType rT = DEFAULT);
+	int roll(int count);
 	void setMax(int dM);
 };
 
@@ -43,6 +44,13 @@ int dint::roll(rType rT)
 			this->dVal=std::min(r,s);
 	}
 	return this->dVal;
+}
+int dint::roll(int count)
+{
+	int sum = 0;
+	for(int i=0;i<count;i++)
+		sum += this->roll();
+	return sum;
 }
 
 void dint::setMax(int dM)
