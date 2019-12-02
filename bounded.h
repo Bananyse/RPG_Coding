@@ -8,19 +8,19 @@ template<typename T> class bounded
 {
 private:
 	T upperBound,value,lowerBound;
+	void checkBounds();
+	void checkValue();
 public:
 	bounded(T a,T b,T v);
-	T getUBound() {return this->upperBound;}
-	T getLBound() {return this->lowerBound;}
-	T getValue() {return this->value;}
-	void checkBounds();
+	const T getUBound() {return this->upperBound;}
+	const T getLBound() {return this->lowerBound;}
+	const T getValue() {return this->value;}
+	const bool isFull() {return this->value==this->upperBound;}
+	const bool isEmpty() {return this->value==this->lowerBound;}
+	const bool isFixed() {return this->upperBound==this->lowerBound;}
 	void setUBound(T x);
 	void setLBound(T x);
-	void checkValue();
 	void setValue(T x);
-	bool isFull() {return this->value==this->upperBound;}
-	bool isEmpty() {return this->value==this->lowerBound;}
-	bool isFixed() {return this->upperBound==this->lowerBound;}
 };
 
 template<typename T> bounded<T>::bounded(T a,T b,T v)
