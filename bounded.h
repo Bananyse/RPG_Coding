@@ -2,7 +2,6 @@
 #define BOUNDED_H
 
 #include <algorithm>
-#include <type_traits>
 
 template<typename T> class bounded
 {
@@ -12,6 +11,7 @@ private:
 	void checkValue();
 public:
 	bounded(T a,T b,T v);
+	virtual ~bounded() {};
 	const T getUBound() {return this->upperBound;}
 	const T getLBound() {return this->lowerBound;}
 	const T getValue() {return this->value;}
@@ -25,8 +25,6 @@ public:
 
 template<typename T> bounded<T>::bounded(T a,T b,T v)
 {
-	if(!std::is_arithmetic<T>::value)
-		throw "UNABLE_TO_SET_BOUND_BY_THIS_TYPE";
 	this->upperBound = a;
 	this->lowerBound = b;
 	this->checkBounds(); // auto-swap

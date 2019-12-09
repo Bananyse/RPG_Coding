@@ -1,9 +1,8 @@
 #ifndef MT19937_H
 #define MT19937_H
  
+#define __CeS constexpr static
 #define __CS const static
-typedef unsigned int uint;
-typedef unsigned long long ull;
 
 /*
 HOW TO USE mt19937.h:
@@ -20,23 +19,25 @@ HOW TO USE mt19937.h:
 
 class MT19937
 {
-public:
-	__CS int N=624,M=397;
-	__CS uint UPPER=0x80000000,LOWER=0x7FFFFFFF;
-	__CS uint C1=0x6C078965,C2=0x9908B0DF;
-	__CS int W=11,X=7,Y=15,Z=18;
-	__CS uint R=0xFFFFFFFF,S=0x9D2C5680,T=0xEFC60000;
+	typedef unsigned int uint;
+	typedef unsigned long long ull;
+	__CeS int N=624,M=397;
+	__CeS uint UPPER=0x80000000,LOWER=0x7FFFFFFF;
+	__CeS uint C1=0x6C078965,C2=0x9908B0DF;
+	__CeS int W=11,X=7,Y=15,Z=18;
+	__CeS uint R=0xFFFFFFFF,S=0x9D2C5680,T=0xEFC60000;
 private:
 	int idx;
 	uint MT[N];
 	void twist();
 public:
-	MT19937(unsigned s)
+	MT19937(unsigned s=0)
 	{
 		//ull __declspec() rdtsc() {__asm("rdtsc");}
 		//this->srand((unsigned)time(NULL));
 		this->srand(s);
 	}
+	virtual ~MT19937() {};
 	void srand(int seed);
 	uint getRand();
 };
@@ -67,7 +68,7 @@ void MT19937::srand(int seed)
 	return;
 }
 
-uint MT19937::getRand()
+MT19937::uint MT19937::getRand()
 {
 	if(this->idx==0) this->twist();
 	uint y = this->MT[idx];

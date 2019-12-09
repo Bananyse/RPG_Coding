@@ -14,6 +14,7 @@ private:
 	MT19937 *randCore;
 public:
 	dint(MT19937 *rC,int dM=DEFAULT_MAX);
+	virtual ~dint() {};
 	const int getMax() { return this->dMax; }
 	const int getVal() { return this->dVal; }
 	enum rType {DEFAULT,TAKEMAX,TAKEMIN};
